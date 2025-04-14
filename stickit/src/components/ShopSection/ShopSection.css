@@ -1,0 +1,151 @@
+.shop-section {
+  width: 100%;
+  max-width: 1440px;
+  height: 800px;
+  background-color: #ffffff;
+  margin: 40px auto 0; /* Центрируем .shop-section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.shop-header {
+  width: 100%;
+  max-width: 1380px;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin: 0 auto 20px; /* Центрируем .shop-header */
+}
+
+.shop-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.visit-shop-button {
+  width: 226px;
+  height: 60px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.visit-shop-button:hover {
+  background-color: #0a0063;
+  transform: scale(1.05);
+}
+
+.shop-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto; /* Центрируем .shop-categories */
+}
+
+.category-item {
+  width: 440px;
+  height: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-margin-top: 90px;
+}
+
+#sticks {
+  background-color: #2b1894; /* Красный для STICKS */
+}
+
+#skates {
+  background-color: #4d79ff; /* Синий для SKATES */
+}
+
+#helmets {
+  background-color: #4d79ff; /* Зеленый для HELMETS */
+}
+
+#pads {
+  background-color: #2b1894; /* Желтый для PADS */
+}
+
+#bags {
+  background-color: #2b1894;/* Фиолетовый для BAGS & ACCESSORIES */
+}
+
+#other {
+  background-color: #4d79ff; /* Оранжевый для OTHER */
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптивность */
+@media (max-width: 1440px) {
+  .shop-section {
+    height: auto;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .shop-header {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .shop-categories {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .category-item {
+    width: 45%;
+    height: 300px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-item {
+    width: 100%;
+    height: 200px;
+    font-size: 18px;
+  }
+
+  .visit-shop-button {
+    width: 180px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .shop-title {
+    font-size: 28px;
+
+  }
+}
