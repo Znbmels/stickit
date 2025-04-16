@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Устанавливаем Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Укажи нужную версию Node.js
+
+      # Шаг 3: Кэшируем зависимости
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Шаг 4: Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm install
+
+      # Шаг 5: Сборка проекта
+      - name: Build project
+        run: npm run build
+
+      # Шаг 6: Запуск тестов (если они есть)
+      - name: Run tests
+        run: npm test -- --passWithNoTests 
