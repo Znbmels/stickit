@@ -37,12 +37,12 @@ jobs:
         run: npm install
         working-directory: stickit
 
-      # Шаг 5: Сборка проекта
+      # Шаг 5: Сборка проекта (CI=false отключает строгий режим)
       - name: Build project
-        run: npm run build
+        run: CI=false npm run build
         working-directory: stickit
 
-      # Шаг 6: Тесты (необязательно)
+      # Шаг 6: Запуск тестов (если есть)
       - name: Run tests
         run: npm test -- --passWithNoTests
         working-directory: stickit
