@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,14 +35,17 @@ jobs:
       # Шаг 4: Устанавливаем зависимости
       - name: Install dependencies
         run: npm install
+        working-directory: stickit
 
       # Шаг 5: Сборка проекта
       - name: Build project
         run: npm run build
+        working-directory: stickit
 
-      # Шаг 6: Запуск тестов (если есть)
+      # Шаг 6: Тесты (необязательно)
       - name: Run tests
         run: npm test -- --passWithNoTests
+        working-directory: stickit
 
       # Шаг 7: Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
@@ -50,4 +53,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: stickit/build
