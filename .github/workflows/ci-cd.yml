@@ -8,6 +8,12 @@ on:
     branches:
       - main
 
+# 👇 Доступы для GitHub Actions, чтобы пушить на gh-pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -37,7 +43,7 @@ jobs:
         run: npm install
         working-directory: stickit
 
-      # Шаг 5: Сборка проекта (CI=false отключает строгий режим)
+      # Шаг 5: Сборка проекта (CI=false, чтобы не падал билд из-за ворнингов)
       - name: Build project
         run: CI=false npm run build
         working-directory: stickit
