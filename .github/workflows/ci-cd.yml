@@ -1,0 +1,62 @@
+name: CI/CD Pipeline for React
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 👇 Доступы для GitHub Actions, чтобы пушить на gh-pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Устанавливаем Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Шаг 3: Кэшируем зависимости
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Шаг 4: Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm install
+        working-directory: stickit
+
+      # Шаг 5: Сборка проекта (CI=false, чтобы не падал билд из-за ворнингов)
+      - name: Build project
+        run: CI=false npm run build
+        working-directory: stickit
+
+      # Шаг 6: Запуск тестов (если есть)
+      - name: Run tests
+        run: npm test -- --passWithNoTests
+        working-directory: stickit
+
+      # Шаг 7: Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: stickit/build
