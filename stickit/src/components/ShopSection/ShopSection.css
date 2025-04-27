@@ -1,9 +1,8 @@
 .shop-section {
   width: 100%;
   max-width: 1440px;
-  height: 800px;
   background-color: #ffffff;
-  margin: 40px auto 0; /* Центрируем .shop-section */
+  margin: 40px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +20,7 @@
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
-  margin: 0 auto 20px; /* Центрируем .shop-header */
+  margin: 0 auto 20px;
 }
 
 .shop-title {
@@ -29,6 +28,7 @@
   font-weight: bold;
   color: black;
   margin: 0;
+  font-family: 'Afacad', sans-serif;
 }
 
 .visit-shop-button {
@@ -42,6 +42,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  font-family: 'Afacad', sans-serif;
 }
 
 .visit-shop-button:hover {
@@ -50,18 +51,18 @@
 }
 
 .shop-categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid; /* Используем grid для создания сетки 3x2 */
+  grid-template-columns: repeat(3, 1fr); /* 3 столбца одинаковой ширины */
+  grid-template-rows: repeat(2, auto); /* 2 ряда */
+  gap: 20px; /* Отступы между категориями */
   width: 100%;
   max-width: 1380px;
-  margin: 0 auto; /* Центрируем .shop-categories */
+  margin: 0 auto;
 }
 
 .category-item {
-  width: 440px;
-  height: 440px;
+  width: 100%; /* Занимает всю ширину ячейки грида */
+  aspect-ratio: 1 / 1; /* Делаем квадратные пропорции (ширина = высоте) */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,34 +70,35 @@
   font-size: 24px;
   font-weight: bold;
   color: #ffffff;
-  border: 1px solid #ddd;
+  border: none; /* Убираем границу */
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   scroll-margin-top: 90px;
+  font-family: 'Afacad', sans-serif;
 }
 
 #sticks {
-  background-color: #2b1894; /* Красный для STICKS */
+  background-color: #2b1894;
 }
 
 #skates {
-  background-color: #4d79ff; /* Синий для SKATES */
+  background-color: #4d79ff;
 }
 
 #helmets {
-  background-color: #4d79ff; /* Зеленый для HELMETS */
+  background-color: #2b1894;
 }
 
 #pads {
-  background-color: #2b1894; /* Желтый для PADS */
+  background-color: #4d79ff;
 }
 
 #bags {
-  background-color: #2b1894;/* Фиолетовый для BAGS & ACCESSORIES */
+  background-color: #2b1894;
 }
 
 #other {
-  background-color: #4d79ff; /* Оранжевый для OTHER */
+  background-color: #4d79ff;
 }
 
 .category-item:hover {
@@ -107,7 +109,6 @@
 /* Адаптивность */
 @media (max-width: 1440px) {
   .shop-section {
-    height: auto;
     padding: 10px;
     max-width: 100%;
   }
@@ -121,20 +122,22 @@
   .shop-categories {
     width: 100%;
     max-width: 100%;
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr); /* Сохраняем 3 столбца */
+    gap: 15px;
   }
 
   .category-item {
-    width: 45%;
-    height: 300px;
     font-size: 20px;
   }
 }
 
 @media (max-width: 768px) {
+  .shop-categories {
+    grid-template-columns: repeat(2, 1fr); /* На маленьких экранах 2 столбца */
+    gap: 10px;
+  }
+
   .category-item {
-    width: 100%;
-    height: 200px;
     font-size: 18px;
   }
 
@@ -146,6 +149,26 @@
 
   .shop-title {
     font-size: 28px;
+  }
+}
 
+@media (max-width: 480px) {
+  .shop-categories {
+    grid-template-columns: 1fr; /* На очень маленьких экранах 1 столбец */
+    gap: 10px;
+  }
+
+  .category-item {
+    font-size: 16px;
+  }
+
+  .visit-shop-button {
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .shop-title {
+    font-size: 24px;
   }
 }
